@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拾光记 · 简答题训练</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+    <!-- 首页 -->
+    <section id="page-home" class="page active">
+      <header class="brutal-header">
+        <h1 class="glitch" data-text="拾光记">拾光记</h1>
+        <p class="sub">简答题 · 背诵 · 实战 · 记忆</p>
+      </header>
+
+      <div class="card import-card">
+        <div class="card-badge warn">导入</div>
+        <textarea id="import-input" placeholder="#name: 题库名称
+#id: bank_id
+
+[type:essay]
+题目内容
+[answer:答案]
+[explain:解析]"></textarea>
+        <div class="btn-row">
+          <button class="btn btn-danger" id="btn-import">导入题库</button>
+          <button class="btn btn-secondary" id="btn-load-default">示例题库</button>
+        </div>
+        <div class="import-msg" id="import-msg"></div>
+      </div>
+
+      <div class="card bank-list-card">
+        <div class="card-badge">题库概览</div>
+        <div id="bank-list" class="bank-list">
+          <div class="bank-empty">暂无题库，请先导入</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 背题 -->
+    <section id="page-review" class="page">
+      <header class="page-header">
+        <span class="page-counter" id="review-counter">1 / 0</span>
+      </header>
+      <div class="card question-card" id="review-card">
+        <div class="q-num" id="review-num">Q1</div>
+        <div class="q-text" id="review-question">请先导入题库</div>
+        <div class="q-answer" id="review-answer"></div>
+        <div class="q-explain" id="review-explain"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" id="btn-review-prev">上一题</button>
+        <button class="btn" id="btn-review-toggle">显示答案</button>
+        <button class="btn" id="btn-review-picker">选题</button>
+        <button class="btn btn-secondary" id="btn-review-next">下一题</button>
+      </div>
+    </section>
+
+    <!-- 选题弹窗 -->
+    <div class="modal hidden" id="review-modal">
+      <div class="modal-backdrop" id="review-modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>选择题目</h3>
+          <button class="modal-close" id="btn-review-modal-close">×</button>
+        </div>
+        <div class="modal-body" id="review-modal-list"></div>
+      </div>
+    </div>
+
+    <!-- 记忆 -->
+    <section id="page-memory" class="page">
+      <header class="page-header">
+        <span class="page-counter" id="memory-counter">1 / 0</span>
+      </header>
+      <div class="card question-card">
+        <div class="q-num" id="memory-num">Q1</div>
+        <div class="q-text" id="memory-question">请先导入题库</div>
+        <textarea id="memory-input" class="memory-input" placeholder="在此输入你的答案..."></textarea>
+        <div class="btn-row">
+          <button class="btn btn-secondary" id="btn-memory-prev">上一题</button>
+          <button class="btn btn-danger" id="btn-memory-judge">判断</button>
+          <button class="btn btn-secondary" id="btn-memory-next">下一题</button>
+        </div>
+        <div class="feedback" id="memory-feedback"></div>
+        <div class="answer-reveal hidden" id="memory-reveal">
+          <div class="reveal-top">
+            <span class="reveal-label">标准答案</span>
+            <span class="eye-icon" id="memory-eye" title="悬停查看答案">👁</span>
+          </div>
+          <div class="reveal-content hidden" id="memory-answer-wrap">
+            <div id="memory-answer"></div>
+          </div>
+        </div>
+        <button class="btn btn-reset hidden" id="btn-memory-reset">重置训练</button>
+      </div>
+    </section>
+
+    <!-- 实战 -->
+    <section id="page-battle" class="page">
+      <header class="page-header">
+        <span class="page-counter" id="battle-counter">0 / 0</span>
+      </header>
+      <div class="card question-card">
+        <div class="q-num" id="battle-num">Q?</div>
+        <div class="q-text" id="battle-question">请先导入题库</div>
+        <textarea id="battle-input" class="memory-input" placeholder="实战作答，不计提示..."></textarea>
+        <div class="btn-row">
+          <button class="btn btn-danger" id="btn-battle-submit">提交答案</button>
+          <button class="btn btn-secondary" id="btn-battle-skip">跳过</button>
+        </div>
+        <div class="feedback" id="battle-feedback"></div>
+        <div class="score-bar">
+          <div class="score-fill" id="battle-score-fill"></div>
+        </div>
+        <div class="score-text">正确率：<span id="battle-rate">0%</span></div>
+      </div>
+    </section>
+
+    <!-- 我的 -->
+    <section id="page-profile" class="page">
+      <div class="card stat-card">
+        <div class="card-badge">学习统计</div>
+        <div class="stat-grid">
+          <div class="stat-box">
+            <span class="stat-num" id="stat-total">0</span>
+            <span class="stat-label">累计作答</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" id="stat-correct">0</span>
+            <span class="stat-label">正确次数</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" id="stat-rate">0%</span>
+            <span class="stat-label">正确率</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card study-card">
+        <div class="card-badge">学习时间</div>
+        <div class="study-grid">
+          <div class="study-box">
+            <span class="stat-num" id="study-total">0</span>
+            <span class="stat-label">累计学习(秒)</span>
+          </div>
+          <div class="study-box">
+            <span class="stat-num" id="study-session">0</span>
+            <span class="stat-label">本次已学(秒)</span>
+          </div>
+          <div class="study-box wide">
+            <span class="stat-num" id="study-formatted">00:00:00</span>
+            <span class="stat-label">累计时长</span>
+          </div>
+        </div>
+        <div class="study-controls">
+          <div class="threshold-row">
+            <label for="study-threshold">记录阈值(秒)：</label>
+            <input type="number" id="study-threshold" min="1" value="60">
+            <span class="threshold-hint">关闭前达到此值才记录，且计入总时长</span>
+          </div>
+          <button class="btn" id="btn-export-study">导出 CSV</button>
+        </div>
+      </div>
+
+      <div class="card danger-zone">
+        <div class="card-badge warn">危险操作</div>
+        <button class="btn btn-danger" id="btn-clear">清空学习数据</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部导航 -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-item active" data-page="home">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">首页</span>
+    </button>
+    <button class="nav-item" data-page="review">
+      <span class="nav-icon">☰</span>
+      <span class="nav-label">背题</span>
+    </button>
+    <button class="nav-item" data-page="memory">
+      <span class="nav-icon">✎</span>
+      <span class="nav-label">记忆</span>
+    </button>
+    <button class="nav-item" data-page="battle">
+      <span class="nav-icon">⚔</span>
+      <span class="nav-label">实战</span>
+    </button>
+    <button class="nav-item" data-page="profile">
+      <span class="nav-icon">◉</span>
+      <span class="nav-label">我的</span>
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
