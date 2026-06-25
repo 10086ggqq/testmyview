@@ -170,7 +170,41 @@
         <button class="btn btn-danger" id="btn-clear">清空学习数据</button>
       </div>
     </section>
+    <!-- 仪表盘 -->
+    <section id="page-dashboard" class="page">
+      <div class="card dashboard-card">
+        <div class="card-badge">AI 判题</div>
+        <div class="dashboard-toggle-row">
+          <span class="dashboard-toggle-label">AI 判题模式</span>
+          <button class="toggle-switch" id="ai-enabled-toggle" aria-pressed="false">
+            <span class="toggle-knob"></span>
+          </button>
+          <span class="toggle-state-text" id="ai-enabled-text">已关闭</span>
+        </div>
+        <p class="dashboard-hint">开启后，相似度在 40%-80% 之间的答案将交由 AI 精细判分；≥80% 直接判对，&lt;40% 直接判错。</p>
+      </div>
+
+      <div class="card provider-card">
+        <div class="card-badge">模型供应商</div>
+        <div class="dashboard-toggle-row">
+          <span class="dashboard-toggle-label">额度耗尽自动切换</span>
+          <button class="toggle-switch" id="ai-autoswitch-toggle" aria-pressed="true">
+            <span class="toggle-knob"></span>
+          </button>
+          <span class="toggle-state-text" id="ai-autoswitch-text">已开启</span>
+        </div>
+        <div id="provider-list" class="provider-list"></div>
+      </div>
+
+      <div class="card dashboard-status-card">
+        <div class="card-badge">状态</div>
+        <div id="ai-status" class="ai-status">AI 判题未开启</div>
+      </div>
+    </section>
   </main>
+
+  <!-- 固定/恢复导航栏自动隐藏的小开关（默认自动隐藏开启，此开关默认关闭） -->
+  <button id="nav-autohide-toggle" class="nav-autohide-toggle" aria-pressed="false" aria-label="切换导航栏自动隐藏" title="固定导航栏（关闭自动隐藏）">📌</button>
 
   <!-- 底部导航 -->
   <nav class="bottom-nav" id="bottom-nav">
@@ -193,6 +227,10 @@
     <button class="nav-item" data-page="profile">
       <span class="nav-icon">◉</span>
       <span class="nav-label">我的</span>
+    </button>
+    <button class="nav-item" data-page="dashboard">
+      <span class="nav-icon">◈</span>
+      <span class="nav-label">仪表盘</span>
     </button>
   </nav>
 

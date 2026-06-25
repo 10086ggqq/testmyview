@@ -231,6 +231,36 @@ body {
   font-size: 0.9rem;
 }
 
+.bank-delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--black);
+  background: #fff;
+  color: var(--black);
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s, background 0.12s, color 0.12s;
+  z-index: 2;
+}
+
+.bank-delete-btn:hover {
+  background: var(--red);
+  color: #fff;
+  transform: scale(1.15);
+}
+
+.bank-card.active .bank-delete-btn {
+  top: 38px;
+}
+
 .bank-empty {
   border: 3px dashed var(--black);
   padding: 36px 28px;
@@ -425,6 +455,8 @@ textarea:focus {
   padding: 16px;
   margin-bottom: 12px;
   font-weight: bold;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .q-answer.visible {
@@ -437,6 +469,8 @@ textarea:focus {
   border: 3px solid var(--black);
   padding: 14px;
   font-size: 0.95rem;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .q-explain.visible {
@@ -487,6 +521,8 @@ textarea:focus {
   padding-top: 12px;
   border-top: 3px solid var(--black);
   font-weight: bold;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .reveal-content.hidden {
@@ -653,6 +689,236 @@ textarea:focus {
   font-weight: bold;
 }
 
+/* Dashboard */
+.dashboard-card {
+  transform: rotate(-0.3deg);
+}
+
+.dashboard-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.dashboard-toggle-label {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+
+.toggle-switch {
+  width: 56px;
+  height: 30px;
+  border: var(--border);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  transition: background 0.15s ease;
+  flex-shrink: 0;
+}
+
+.toggle-switch .toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(--black);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toggle-switch[aria-pressed="true"] {
+  background: var(--yellow);
+}
+
+.toggle-switch[aria-pressed="true"] .toggle-knob {
+  transform: translateX(26px);
+}
+
+.toggle-state-text {
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-hint {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.provider-card {
+  transform: rotate(0.3deg);
+}
+
+.provider-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.provider-item {
+  border: var(--border);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+  transition: transform 0.1s;
+}
+
+.provider-item.active {
+  background: var(--yellow);
+}
+
+.provider-item.exhausted {
+  opacity: 0.55;
+  background: #eee;
+}
+
+.provider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.provider-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.provider-tag {
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border: 3px solid var(--black);
+  background: var(--paper);
+  letter-spacing: 0.5px;
+}
+
+.provider-tag.current {
+  background: var(--black);
+  color: var(--yellow);
+}
+
+.provider-tag.exhausted {
+  background: var(--red);
+  color: #fff;
+}
+
+.provider-models {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.provider-model-btn {
+  border: 3px solid var(--black);
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.provider-model-btn.active {
+  background: var(--black);
+  color: var(--yellow);
+}
+
+.provider-key-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  margin-bottom: 10px;
+}
+
+.provider-key-input {
+  flex: 1;
+  min-width: 0;
+  border: var(--border);
+  padding: 8px 10px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  outline: none;
+}
+
+.provider-key-input:focus {
+  background: #fffef0;
+}
+
+.provider-activate-btn {
+  border: var(--border);
+  background: var(--black);
+  color: var(--yellow);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 8px 14px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.provider-activate-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--black);
+}
+
+.provider-quota {
+  font-size: 0.82rem;
+  font-weight: bold;
+}
+
+.quota-bar {
+  height: 14px;
+  border: 3px solid var(--black);
+  background: #fff;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.quota-fill {
+  height: 100%;
+  background: var(--yellow);
+  transition: width 0.3s ease;
+}
+
+.quota-fill.warn {
+  background: var(--red);
+}
+
+.dashboard-status-card {
+  transform: rotate(-0.2deg);
+}
+
+.ai-status {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.ai-status .ai-pending {
+  color: var(--black);
+  background: var(--yellow);
+  display: inline-block;
+  padding: 2px 8px;
+  border: 3px solid var(--black);
+}
+
 /* Bottom nav */
 .bottom-nav {
   position: fixed;
@@ -671,6 +937,39 @@ textarea:focus {
   transform: translate(-50%, 120px);
   opacity: 0;
   pointer-events: none;
+}
+
+/* 自动隐藏开关 */
+.nav-autohide-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1001;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: var(--border);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+  color: var(--black);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.nav-autohide-toggle:hover {
+  opacity: 1;
+}
+
+.nav-autohide-toggle.active {
+  background: var(--yellow);
+  opacity: 1;
+  transform: rotate(-12deg);
 }
 
 .nav-item {
